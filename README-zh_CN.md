@@ -33,22 +33,33 @@ Options explanation:
         -v      show verbose/debug messages
 ```
 
+例：
+
+```
+PortProtection -p 12345 -pp 23456 -i eth0 -k 123 -cf ../cert/pp.crt -kf ../cert/pp.key -v
+```
+
 ### 客户端
 
 该软件使用了TLS来加密，因此你需要使用 `openssl` 或 `curl` 来进行请求
 
 提示： `time` 选项可以省略，默认为1
 
+
 #### openssl:
 
-`openssl s_client -connect server_ip:port`
+```
+openssl s_client -connect server_ip:port
+```
 
 然后输入 `key=xxx&time=xxx` 来授权
 
 
 #### curl
 
-`curl -k https://server_ip:port/ -d "key=xxx&time=xxx"`
+```
+curl -k https://server_ip:port/ -d "key=xxx&time=xxx"
+```
 
 ## 编译
 

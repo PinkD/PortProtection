@@ -33,6 +33,12 @@ Options explanation:
         -v      show verbose/debug messages
 ```
 
+Example:
+
+```
+PortProtection -p 12345 -pp 23456 -i eth0 -k 123 -cf ../cert/pp.crt -kf ../cert/pp.key -v
+```
+
 ### Client
 
 TLS was used in the project, so you can use openssl or curl to request
@@ -41,13 +47,17 @@ NOTE: `time` can be omitted, default value is 1
 
 #### openssl:
 
-`openssl s_client -connect server_ip:port`
+```
+openssl s_client -connect server_ip:port
+```
 
 then you input `key=xxx&time=xxx` to authorize.
 
 #### curl
 
-`curl -k https://server_ip:port/ -d "key=xxx&time=xxx"`
+```
+curl -k https://server_ip:port/ -d "key=xxx&time=xxx"
+```
 
 ## Build
 
