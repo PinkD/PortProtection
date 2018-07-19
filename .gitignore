@@ -1,5 +1,9 @@
 test*
 .idea
 cmake-build-debug
-cert
+*.key
+*.crt
+*.csr
+*.srl
+*.pem
 build
