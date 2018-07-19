@@ -10,7 +10,7 @@ It drops the connection to the protected port by default and starts a daemon to 
 
 ### Server
 
-Before you use it, you should generate your own ssl cert. Use [gen.sh](certs/gen.sh) to do that
+Before you use it, you should generate your own ssl cert. Use [gen.sh](cert/gen.sh) to do that
 
 ```
 Usage: ./PortProtection 

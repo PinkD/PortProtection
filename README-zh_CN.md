@@ -10,7 +10,7 @@
 
 ### 服务端
 
-在使用本软件之前，你需要手动生成ssl证书，本软件提供了脚本： [gen.sh](certs/gen.sh)
+在使用本软件之前，你需要手动生成ssl证书，本软件提供了脚本： [gen.sh](cert/gen.sh)
 
 ```
 Usage: ./PortProtection 
