@@ -34,8 +34,14 @@ void print_error(ParseErrorCode error_code) {
     switch (error_code) {
         case NOT_ENOUGH_ARG:
             break;
+        case BAD_CONFIG_FILE:
+            printf("bad config file\n");
+            break;
         case BAD_PORT_NUMBER:
             printf("bad port number\n");
+            break;
+        case UNKNOWN_PARAM:
+            printf("unknown parameter detected\n");
             break;
         case UNKNOWN_ERROR:
         default:

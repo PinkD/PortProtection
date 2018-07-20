@@ -35,11 +35,5 @@ void handle_signal() {
     if (sigaction(SIGTERM, &action, NULL)) {
         printf("Error handling SIGTERM.\n");
     }
-    if (verbose) {
-        printf("Handling SIGKILL\n");
-    }
-    if (sigaction(SIGKILL, &action, NULL)) {
-        printf("Error handling SIGKILL.\n");
-    }
 //    signal(SIGINT, _signal_handler);
 }

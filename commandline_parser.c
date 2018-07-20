@@ -40,15 +40,18 @@ char *read_key(char *path) {
     }
 }
 
-Argument *parse_args(int argc, char *argv[]) {//TODO: #enhancement# parse config file
+Argument *parse_args(int argc, char *argv[]) {
     Argument *arg = malloc(sizeof(Argument));
     arg->error_code = OK;
-    if (argc < 13) {//not enough arg
+    if (argc < 13 && argc != 3) {//not enough arg, the second condition is for `-c`
         arg->error_code = NOT_ENOUGH_ARG;
         return arg;
     }
     for (int i = 1; i < argc; i++) {
-        if (!strcmp(argv[i], "-v") || !strcmp(argv[i], "--verbose")) {
+        if (!strcmp(argv[i], "-c") || !strcmp(argv[i], "--config")) {
+            arg = parse_config(argv[0], argv[++i]);
+            break;
+        } else if (!strcmp(argv[i], "-v") || !strcmp(argv[i], "--verbose")) {
             arg->verbose = true;
         } else if (!strcmp(argv[i], "-p") || !strcmp(argv[i], "--port")) {
             ushort port = (ushort) atoi(argv[++i]);
@@ -58,7 +61,7 @@ Argument *parse_args(int argc, char *argv[]) {//TODO: #enhancement# parse config
                 arg->error_code = BAD_PORT_NUMBER;
                 return arg;
             }
-        } else if (!strcmp(argv[i], "-pp") || !strcmp(argv[i], "--protect")) {
+        } else if (!strcmp(argv[i], "-pp") || !strcmp(argv[i], "--protect-port")) {
             ushort port = (ushort) atoi(argv[++i]);
             if (port) {
                 arg->protect_port = port;
@@ -105,10 +108,10 @@ Argument *parse_args(int argc, char *argv[]) {//TODO: #enhancement# parse config
             char *key_file = malloc(strlen(tmp) + 1);
             strcpy(key_file, tmp);
             arg->key_file = key_file;
+        } else {
+            arg->error_code = UNKNOWN_PARAM;
+            return arg;
         }
-    }
-    if (verbose) {
-        print_arg(arg);
     }
     return arg;
 }

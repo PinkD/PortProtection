@@ -18,6 +18,7 @@ add_executable(PortProtection
         authorization.c
         timer.c
         debug.c
+        config_parser.c
         )
 
 

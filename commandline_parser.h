@@ -9,9 +9,11 @@
 #include <stdlib.h>
 
 #include "debug.h"
+#include "config_parser.h"
 
 
-static const int MAX_STR_LEN = 255;
+static const int MAX_STR_LEN = 254;
+static const int MAX_PARAM_LEN = 15;
 
 typedef unsigned short ushort;
 typedef enum {
@@ -21,7 +23,9 @@ typedef enum {
     BAD_INTERFACE,
     BAD_KEY_TOO_LONG,
     BAD_KEY_FILE,
-    UNKNOWN_ERROR
+    UNKNOWN_ERROR,
+    UNKNOWN_PARAM,
+    BAD_CONFIG_FILE
 
 } ParseErrorCode;
 
