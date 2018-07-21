@@ -7,9 +7,6 @@
 #include <stdbool.h>
 #include <unistd.h>
 
-#include "iptables_wrapper.h"
-#include "debug.h"
-
 typedef struct ST_TASK_TMP {
     char *addr;//don't free, it's not a copy
     time_t start;
@@ -17,6 +14,8 @@ typedef struct ST_TASK_TMP {
     struct ST_TASK_TMP *next;
 } Task;
 
+#include "iptables_wrapper.h"
+#include "debug.h"
 
 Task *task_list;
 pthread_mutex_t *mutex;

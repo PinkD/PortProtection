@@ -12,6 +12,8 @@ void print_help(char *name) {
                    "\t-f, --file <key file>\n"
                    "\t-cf, --cert-file <ssl cert file>\n"
                    "\t-kf, --key-file <ssl key file>\n"
+                   "\t-t, --tcp\n"
+                   "\t-u, --udp\n"
                    "\t-v, --verbose\n", name
     );
     printf("Options explanation:\n"
@@ -22,6 +24,8 @@ void print_help(char *name) {
                    "\t-f\tfile with authorization key(optional)\n"
                    "\t-cf\tssl cert file\n"
                    "\t-kf\tssl key file\n"
+                   "\t-t\ttcp protocol(default)\n"
+                   "\t-u\tudp protocol\n"
                    "\t-v\tshow verbose/debug messages\n"
     );
 }

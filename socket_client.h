@@ -2,11 +2,6 @@
 #ifndef PORT_PROTECTION_SOCKET_CLIENT_H
 #define PORT_PROTECTION_SOCKET_CLIENT_H
 
-#include "request_handler.h"
-#include "authorization.h"
-#include "debug.h"
-
-
 #include <string.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
@@ -14,6 +9,10 @@
 #include <unistd.h>
 #include <openssl/ssl.h>
 #include <openssl/err.h>
+
+#include "request_handler.h"
+#include "authorization.h"
+#include "debug.h"
 
 
 // OpenSSL Code Reference: TLS support in https://wiki.openssl.org/index.php/Simple_TLS_Server

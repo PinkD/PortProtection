@@ -21,6 +21,8 @@ Usage: ./PortProtection
         -f, --file <key file>
         -cf, --cert-file <ssl cert file>
         -kf, --key-file <ssl key file>
+        -t, --tcp
+        -u, --udp
         -v, --verbose
 Options explanation:
         -p      listen port
@@ -30,6 +32,8 @@ Options explanation:
         -f      file with authorization key(optional)
         -cf     ssl cert file
         -kf     ssl key file
+        -t      tcp protocol(default)
+        -u      udp protocol
         -v      show verbose/debug messages
 ```
 

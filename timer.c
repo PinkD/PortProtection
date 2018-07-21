@@ -94,8 +94,8 @@ void task_loop() {
 #pragma clang diagnostic pop
 
 time_t hour_to_second(int hour) {
-//    return hour * 60 * 60;
-    return hour * 5;//debug
+    return hour * 60 * 60;
+//    return hour * 5;//debug
 }
 
 void stop_timer() {

@@ -43,6 +43,7 @@ char *read_key(char *path) {
 Argument *parse_args(int argc, char *argv[]) {
     Argument *arg = malloc(sizeof(Argument));
     arg->error_code = OK;
+    arg->protocol = TCP;
     if (argc < 13 && argc != 3) {//not enough arg, the second condition is for `-c`
         arg->error_code = NOT_ENOUGH_ARG;
         return arg;
@@ -53,6 +54,10 @@ Argument *parse_args(int argc, char *argv[]) {
             break;
         } else if (!strcmp(argv[i], "-v") || !strcmp(argv[i], "--verbose")) {
             arg->verbose = true;
+        } else if (!strcmp(argv[i], "-t") || !strcmp(argv[i], "--tcp")) {
+            arg->protocol = TCP;
+        } else if (!strcmp(argv[i], "-u") || !strcmp(argv[i], "--udp")) {
+            arg->protocol = UDP;
         } else if (!strcmp(argv[i], "-p") || !strcmp(argv[i], "--port")) {
             ushort port = (ushort) atoi(argv[++i]);
             if (port) {

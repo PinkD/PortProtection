@@ -1,10 +1,13 @@
-
 #include "iptables_wrapper.h"
 
 void init_iptables(Argument *arg) {
     argument = arg;
     char *rule = malloc(strlen(INIT_IPTABLES_TEMPLE) + DEFAULT_FILL_LEN);
-    sprintf(rule, INIT_IPTABLES_TEMPLE, argument->interface_name, argument->protect_port);
+    if (argument->protocol == UDP) {
+        sprintf(rule, INIT_IPTABLES_TEMPLE, argument->interface_name, "udp", argument->protect_port);
+    } else {//TCP
+        sprintf(rule, INIT_IPTABLES_TEMPLE, argument->interface_name, "tcp", argument->protect_port);
+    }
     if (verbose) {
         printf("Initializing iptables rule...\n");
         printf(rule);
@@ -18,7 +21,11 @@ void init_iptables(Argument *arg) {
 
 void clean_iptables() {
     char *rule = malloc(strlen(CLEAN_IPTABLES_TEMPLE) + DEFAULT_FILL_LEN);
-    sprintf(rule, CLEAN_IPTABLES_TEMPLE, argument->interface_name, argument->protect_port);
+    if (argument->protocol == UDP) {
+        sprintf(rule, CLEAN_IPTABLES_TEMPLE, argument->interface_name, "udp", argument->protect_port);
+    } else {//TCP
+        sprintf(rule, CLEAN_IPTABLES_TEMPLE, argument->interface_name, "tcp", argument->protect_port);
+    }
     if (verbose) {
         printf("Cleaning iptables rule...\n");
         printf(rule);
@@ -32,7 +39,11 @@ void clean_iptables() {
 
 void insert_client(char *addr) {
     char *rule = malloc(strlen(INSERT_IPTABLES_TEMPLE) + DEFAULT_FILL_LEN);
-    sprintf(rule, INSERT_IPTABLES_TEMPLE, argument->interface_name, argument->protect_port, addr);
+    if (argument->protocol == UDP) {
+        sprintf(rule, INSERT_IPTABLES_TEMPLE, argument->interface_name, "udp", argument->protect_port, addr);
+    } else {//TCP
+        sprintf(rule, INSERT_IPTABLES_TEMPLE, argument->interface_name, "tcp", argument->protect_port, addr);
+    }
     if (verbose) {
         printf("Inserting iptables rule...\n");
         printf(rule);
@@ -46,7 +57,11 @@ void insert_client(char *addr) {
 
 void remove_client(char *addr) {
     char *rule = malloc(strlen(REMOVE_IPTABLES_TEMPLE) + DEFAULT_FILL_LEN);
-    sprintf(rule, REMOVE_IPTABLES_TEMPLE, argument->interface_name, argument->protect_port, addr);
+    if (argument->protocol == UDP) {
+        sprintf(rule, REMOVE_IPTABLES_TEMPLE, argument->interface_name, "udp", argument->protect_port, addr);
+    } else {//TCP
+        sprintf(rule, REMOVE_IPTABLES_TEMPLE, argument->interface_name, "tcp", argument->protect_port, addr);
+    }
     if (verbose) {
         printf("Removing iptables rule...\n");
         printf(rule);

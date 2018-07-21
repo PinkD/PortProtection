@@ -8,9 +8,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "debug.h"
-#include "config_parser.h"
-
 
 static const int MAX_STR_LEN = 254;
 static const int MAX_PARAM_LEN = 15;
@@ -29,6 +26,11 @@ typedef enum {
 
 } ParseErrorCode;
 
+typedef enum {
+    TCP,
+    UDP
+} Protocol;
+
 typedef struct {
     bool verbose;
     ushort listen_port;
@@ -38,7 +40,13 @@ typedef struct {
     char *cert_file;
     char *key_file;
     ParseErrorCode error_code;
+    Protocol protocol;
 } Argument;
+
+
+#include "debug.h"
+#include "config_parser.h"
+
 
 /**
  * check if interface exists
