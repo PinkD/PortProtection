@@ -63,6 +63,13 @@ then you input `key=xxx&time=xxx` to authorize.
 curl -k https://server_ip:port/ -d "key=xxx&time=xxx"
 ```
 
+#### parameter explanation
+
+- key: the key to authorize
+- time: can be number or number+unit, unit can be one of `h` (hour/default), `d` (day), `m` (month/30 days), `y` (year/365 days)
+- e.g. : `key=123&time=2d` , `key=test&time=2`
+
+
 ## Build
 
 ```bash

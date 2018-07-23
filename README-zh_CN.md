@@ -65,6 +65,12 @@ openssl s_client -connect server_ip:port
 curl -k https://server_ip:port/ -d "key=xxx&time=xxx"
 ```
 
+#### 参数
+
+- key: 授权的密码
+- time: 持续时间，可以是数字，也可以是数字加单位，单位可以是 `h` (小时/缺省值), `d` (天), `m` (月份/按30天算), `y` (年/按365天算)
+- 例： `key=123&time=2d` ， `key=test&time=2`
+
 ## 编译
 
 ```bash

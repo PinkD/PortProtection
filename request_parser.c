@@ -49,7 +49,30 @@ Request *_parse_raw(const char *data) {
                 request->key = strdup(value);
             }
         } else if (!strcmp(key, "time")) {
-            int time = atoi(value);
+            int time;
+            size_t len = strlen(value);
+            switch (*(value + len - 1)) {
+                case 'h'://hour
+                    *(value + len - 1) = '\0';
+                    time = 1;
+                    break;
+                case 'd'://day
+                    *(value + len - 1) = '\0';
+                    time = 24;
+                    break;
+                case 'm'://month(30 days)
+                    *(value + len - 1) = '\0';
+                    time = 24 * 30;
+                    break;
+                case 'y'://year
+                    *(value + len - 1) = '\0';
+                    time = 24 * 365;
+                    break;
+                default:
+                    time = 1;
+                    break;
+            }
+            time = atoi(value) * time;
             request->time = time;
         }
     }
