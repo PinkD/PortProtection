@@ -24,6 +24,9 @@ typedef struct {
     int time;
 } Request;
 
+static const char *_GET = "GET /";
+static const char *_POST = "POST / HTTP";
+
 Request *parse_request(const char *data);
 
 Request *_parse_http(const char *data);

@@ -14,13 +14,26 @@ Request *parse_request(const char *data) {
 }
 
 Request *_parse_http(const char *data) {
-    char *start = strstr(data, "\r\n\r\n");
     Request *request;
-    if (start) {
-        start += 4;
+    char *raw = strdup(data);
+    char *tmp = raw;
+    char *start;
+    if (strcmp(tmp, _GET) == '?') {//'?' - '\0' // NOLINT
+        start = tmp = raw + strlen(_GET) + 1;
+        strsep(&tmp, " ");//cut string with space
         request = _parse_raw(start);
         request->type = HTTP;
+        free(raw);
         return request;
+    } else if (strcmp(tmp, _POST) == '/') {//'/' - '\0' // NOLINT
+        start = strstr(raw, "\r\n\r\n");
+        if (start) {
+            start += 4;
+            request = _parse_raw(start);
+            request->type = HTTP;
+            free(raw);
+            return request;
+        }
     }
     request = malloc(sizeof(Request));
     request->type = HTTP_ERROR;
