@@ -22,5 +22,5 @@ add_executable(PortProtection
         )
 
 
-#add_executable(PortProtection test.c socket_client.c request_handler.c request_parser.c authorization.c)
+#add_executable(PortProtection test.c request_parser.c)
 

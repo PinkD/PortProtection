@@ -40,6 +40,8 @@ int create_socket_with_port(ushort port);
 
 void socket_daemon(int socket);
 
+void handle_accept(int client);
+
 void run_socket_client(ushort port, char *cert, char *key);
 
 char *addr_to_ip_str(struct in_addr addr);
