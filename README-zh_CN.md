@@ -13,7 +13,10 @@
 在使用本软件之前，你需要手动生成ssl证书，本软件提供了脚本： [gen.sh](cert/gen.sh)
 
 ```
+PortProtection: 
+        A program to protect port with iptables by authorizing client on another port
 Usage: ./PortProtection 
+        -c, --config <config file>
         -p, --port <listen port>
         -pp, --protect <protect port>
         -i, --interface <interface>
@@ -25,6 +28,7 @@ Usage: ./PortProtection
         -u, --udp
         -v, --verbose
 Options explanation:
+        -p      config file(params in config file will overwrite command line options)
         -p      listen port
         -pp     protect port
         -i      bind interface
@@ -39,8 +43,9 @@ Options explanation:
 
 例：
 
-```
-PortProtection -p 12345 -pp 23456 -i eth0 -k 123 -cf ../cert/pp.crt -kf ../cert/pp.key -v
+```bash
+PortProtection -p 12345 -pp 23456 -i eth0 -k 123 -cf ../cert/pp.crt -kf ../cert/pp.key -v # command line
+PortProtection -c /etc/portpro/12345.conf # config file
 ```
 
 ### 客户端
@@ -52,7 +57,7 @@ PortProtection -p 12345 -pp 23456 -i eth0 -k 123 -cf ../cert/pp.crt -kf ../cert/
 
 #### openssl:
 
-```
+```bash
 openssl s_client -connect server_ip:port
 ```
 
@@ -61,8 +66,9 @@ openssl s_client -connect server_ip:port
 
 #### curl
 
-```
-curl -k https://server_ip:port/ -d "key=xxx&time=xxx"
+```bash
+curl -k https://server_ip:port/ -d "key=xxx&time=xxx" # POST
+curl -k "https://server_ip:port/?key=xxx&time=xxx" # GET
 ```
 
 #### 参数

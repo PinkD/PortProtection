@@ -13,7 +13,10 @@ It drops the connection to the protected port by default and starts a daemon to 
 Before you use it, you should generate your own ssl cert. Use [gen.sh](cert/gen.sh) to do that
 
 ```
+PortProtection: 
+        A program to protect port with iptables by authorizing client on another port
 Usage: ./PortProtection 
+        -c, --config <config file>
         -p, --port <listen port>
         -pp, --protect <protect port>
         -i, --interface <interface>
@@ -25,6 +28,7 @@ Usage: ./PortProtection
         -u, --udp
         -v, --verbose
 Options explanation:
+        -p      config file(params in config file will overwrite command line options)
         -p      listen port
         -pp     protect port
         -i      bind interface
@@ -35,12 +39,14 @@ Options explanation:
         -t      tcp protocol(default)
         -u      udp protocol
         -v      show verbose/debug messages
+
 ```
 
 Example:
 
-```
-PortProtection -p 12345 -pp 23456 -i eth0 -k 123 -cf ../cert/pp.crt -kf ../cert/pp.key -v
+```bash
+PortProtection -p 12345 -pp 23456 -i eth0 -k 123 -cf ../cert/pp.crt -kf ../cert/pp.key -v # command line
+PortProtection -c /etc/portpro/12345.conf # config file
 ```
 
 ### Client
@@ -51,7 +57,7 @@ NOTE: `time` can be omitted, default value is 1
 
 #### openssl:
 
-```
+```bash
 openssl s_client -connect server_ip:port
 ```
 
@@ -59,8 +65,9 @@ then you input `key=xxx&time=xxx` to authorize.
 
 #### curl
 
-```
-curl -k https://server_ip:port/ -d "key=xxx&time=xxx"
+```bash
+curl -k https://server_ip:port/ -d "key=xxx&time=xxx" # POST
+curl -k "https://server_ip:port/?key=xxx&time=xxx" # GET
 ```
 
 #### parameter explanation

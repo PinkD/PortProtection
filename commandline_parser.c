@@ -50,6 +50,7 @@ Argument *parse_args(int argc, char *argv[]) {
     }
     for (int i = 1; i < argc; i++) {
         if (!strcmp(argv[i], "-c") || !strcmp(argv[i], "--config")) {
+            free_arg(arg);//free the previous one
             arg = parse_config(argv[0], argv[++i]);
             break;
         } else if (!strcmp(argv[i], "-v") || !strcmp(argv[i], "--verbose")) {

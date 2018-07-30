@@ -5,6 +5,7 @@ void print_help(char *name) {
     printf("PortProtection: \n"
                    "\tA program to protect port with iptables by authorizing client on another port\n");
     printf("Usage: %s \n"
+                   "\t-c, --config <config file>\n"
                    "\t-p, --port <listen port>\n"
                    "\t-pp, --protect <protect port>\n"
                    "\t-i, --interface <interface>\n"
@@ -17,6 +18,7 @@ void print_help(char *name) {
                    "\t-v, --verbose\n", name
     );
     printf("Options explanation:\n"
+                   "\t-p\tconfig file(params in config file will overwrite command line options)\n"
                    "\t-p\tlisten port\n"
                    "\t-pp\tprotect port\n"
                    "\t-i\tbind interface\n"
