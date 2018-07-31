@@ -7,7 +7,7 @@ void init_argument(Argument *arg) {
 }
 
 bool authorize_with_request(Request *request) {
-    if (!request->key || strcmp(request->key, argument->key)) {//NOLINT
+    if (!request->key || strcmp(argument->key, request->key)) {//NOLINT
         if (verbose) {
             printf("Authorize %s failed\n", request->addr);
         }

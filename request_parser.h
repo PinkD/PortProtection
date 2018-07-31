@@ -37,4 +37,6 @@ void free_request(Request *request);
 
 void str_strip(char *str);
 
+void print_request(Request *request);
+
 #endif

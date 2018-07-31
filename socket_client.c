@@ -118,7 +118,7 @@ void handle_accept(int client) {
             if (verbose) {
                 printf("Connection from %s\n", request->addr);
             }
-            if (request->time < 0 || !authorize_with_request(request)) {
+            if (request->time < 0 || request->type == HTTP_ERROR || request->type == RAW_ERROR || !authorize_with_request(request)) {
                 if (request->type == HTTP) {
                     request->type = HTTP_ERROR;
                 } else if (request->type == RAW) {

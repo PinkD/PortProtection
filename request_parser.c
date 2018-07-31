@@ -18,14 +18,14 @@ Request *_parse_http(const char *data) {
     char *raw = strdup(data);
     char *tmp = raw;
     char *start;
-    if (strcmp(tmp, _GET) == '?') {//'?' - '\0' // NOLINT
+    if (strstr(tmp, _GET)) {// NOLINT
         start = tmp = raw + strlen(_GET) + 1;
         strsep(&tmp, " ");//cut string with space
         request = _parse_raw(start);
         request->type = HTTP;
         free(raw);
         return request;
-    } else if (strcmp(tmp, _POST) == '/') {//'/' - '\0' // NOLINT
+    } else if (strstr(tmp, _POST)) {// NOLINT
         start = strstr(raw, "\r\n\r\n");
         if (start) {
             start += 4;
@@ -114,5 +114,9 @@ void str_strip(char *str) {
         *end = 0;
         str_strip(str);
     }
+}
+
+void print_request(Request *request) {
+    printf("%s %s %d\n", request->addr, request->key, request->time);
 }
 

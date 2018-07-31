@@ -18,8 +18,6 @@ build() {
   cd "$srcdir/$_pkgbase-$pkgver"
   mkdir -p build
   cd build
-  unset CFLAGS
-  unset CXXFLAGS
   cmake ..
   make
 }
