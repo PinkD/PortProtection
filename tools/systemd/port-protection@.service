@@ -4,7 +4,7 @@ After=iptables.service
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/PortProtection -c /etc/portpro/%i.conf
+ExecStart=/usr/bin/port-protection -c /etc/portpro/%i.conf
 WorkingDirectory=/etc/portpro
 
 [Install]
