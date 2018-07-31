@@ -1,0 +1,11 @@
+[Unit]
+Description=A program to protect port with iptables by authorizing client on another port
+After=iptables.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/PortProtection -c /etc/portpro/%i.conf
+WorkingDirectory=/etc/portpro
+
+[Install]
+WantedBy=multi-user.target
