@@ -19,6 +19,7 @@ typedef struct ST_TASK_TMP {
 
 Task *task_list;
 pthread_mutex_t *mutex;
+int exit_code;
 
 pthread_t *start_timer();
 
@@ -28,7 +29,7 @@ void cancel_task(Task *task);
 
 void task_loop();
 
-void stop_timer();
+void stop_timer(int code);
 
 time_t hour_to_second(int hour);
 

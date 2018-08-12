@@ -17,7 +17,7 @@ void _signal_handler(int signal) {
         printf("Stop main loop...\n");
     }
     printf("Doing some cleaning, please wait...\n");
-    stop_timer();//stop main loop
+    stop_timer(0);//stop main loop
 }
 
 void handle_signal() {

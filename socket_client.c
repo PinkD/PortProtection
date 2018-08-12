@@ -41,6 +41,7 @@ int create_socket_with_port(ushort port) {
     int s;
     struct sockaddr_in addr;
 
+    memset(&addr, 0, sizeof(addr));
     addr.sin_family = AF_INET;
     addr.sin_port = htons((uint16_t) port);
     addr.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -74,7 +75,6 @@ int create_socket_with_port(ushort port) {
 #pragma ide diagnostic ignored "OCDFAInspection"
 
 void socket_daemon(int socket) {
-
     while (true) {
         struct sockaddr_in *addr;
         uint len = sizeof(addr);
@@ -83,15 +83,19 @@ void socket_daemon(int socket) {
         int client = accept(socket, (struct sockaddr *) addr, &len);
         if (client < 0) {
             perror("Unable to accept");
-            return;
+            break;
         } else {
+            Converter converter;
+            converter.data = client;
             pthread_t t;
-            pthread_create(&t, NULL, (void *) handle_accept, (void *) client);
+            pthread_create(&t, NULL, (void *) handle_accept, converter.ptr);
         }
     }
     close(socket);
     SSL_CTX_free(ctx);
     _cleanup_openssl();
+    printf("Socket closed with error\n");
+    stop_timer(-1);
 }
 
 #pragma clang diagnostic pop
@@ -163,8 +167,6 @@ void handle_accept(int client) {
 
 
 void run_socket_client(ushort port, char *cert, char *key) {
-    int sock;
-
     _init_openssl();
     ctx = _create_context();
 
@@ -176,8 +178,10 @@ void run_socket_client(ushort port, char *cert, char *key) {
         printf("Creating socket thread...\n");
     }
 
+    Converter converter;
+    converter.data = sock;
     pthread_t t;
-    pthread_create(&t, NULL, (void *) socket_daemon, (void *) sock);
+    pthread_create(&t, NULL, (void *) socket_daemon, converter.ptr);
     //cleaning up is in pthread, maybe never execute
 }
 

@@ -84,11 +84,12 @@ void task_loop() {
             }
         }
         pthread_mutex_unlock(mutex);//unlock list
-        sleep(5);//check every 5 seconds
+        sleep(3);//check every 3 seconds
     }
     if (verbose) {
         printf("Leaving main loop...\n");
     }
+    exit(exit_code);
 }
 
 #pragma clang diagnostic pop
@@ -98,7 +99,8 @@ time_t hour_to_second(int hour) {
 //    return hour * 5;//debug
 }
 
-void stop_timer() {
+void stop_timer(int code) {
+    exit_code = code;
     Task *t = task_list;
     if (verbose) {
         printf("Cleaning up list...\n");

@@ -25,8 +25,13 @@ const static char *RESPONSE_RAW_OK = "OK\r\n%s\r\n";
 const static char *RESPONSE_HTTP_BAD_REQUEST = "HTTP/1.0 400 Bad Request\r\nContent-Length: 7\r\nConnection: close\r\n\r\nERROR\r\n";
 const static char *RESPONSE_RAW_BAD_REQUEST = "ERROR\r\n";
 
+typedef union {
+    int data;
+    void *ptr;
+} Converter;
 
 static SSL_CTX *ctx;
+int sock;
 
 void _init_openssl();
 
